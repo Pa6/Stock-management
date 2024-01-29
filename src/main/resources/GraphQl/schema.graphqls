@@ -1,0 +1,119 @@
+type Query {
+    orders(page: Int!, size: Int!): PageResultOrder
+    products(page: Int!, size: Int!): PageResultProduct
+    productLines(page: Int!, size: Int!): PageResultProductLine
+    users(page: Int!, size: Int!): PageResultUser
+    getOrderById(id: Int!):Order
+    getProductById(id: Int!):Product
+    getProductLineById(id: Int!):ProductLine
+    getUserById(userId: Int!):User
+}
+
+type Mutation {
+    createOrder(orderInput: OrderInput): Order
+    createProduct(productInput: ProductInput): Product
+    createProductLine(productLineInput: ProductLineInput): ProductLine
+    createUser(userInput: UserInput): User
+    updateOrder(orderId: ID!, orderInput: OrderInput): Order
+    updateProduct(productId: ID!, productInput: ProductInput): Product
+    updateProductLine(productLineId: ID!, productLineInput: ProductLineInput): ProductLine
+    updateUser(userId: ID!, userInput: UserInput): User
+    deleteOrder(orderId: ID!): Boolean
+    deleteProduct(productId: ID!): Boolean
+    deleteProductLine(productLineId: ID!): Boolean
+    deleteUser(userId: ID!): Boolean
+}
+
+input OrderInput {
+    productLineIds: [ID]
+}
+
+input ProductInput {
+    name: String!
+    stock: Int!
+    price: Float!
+}
+
+input ProductLineInput {
+    productId: ID!
+    quantity: Int!
+}
+
+
+input UserInput {
+    name: String!
+    email: String!
+    password: String!
+    roles: [Role!]!
+}
+
+type Order {
+    id: ID!
+    productLines: [ProductLine]
+    user: User
+}
+
+type Product {
+    id: ID!
+    name: String!
+    stock: Int!
+    price: Float!
+}
+
+type ProductLine {
+    id: ID!
+    product: Product
+    quantity: Int!
+    order: Order
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    roles: [Role!]!
+}
+
+type PageResultOrder {
+    content: [Order]!
+    pageNumber: Int!
+    pageSize: Int!
+    totalElements: Int!
+    totalPages: Int!
+}
+
+type PageResultProduct {
+    content: [Product]!
+    pageNumber: Int!
+    pageSize: Int!
+    totalElements: Int!
+    totalPages: Int!
+}
+
+type PageResultProductLine {
+    content: [ProductLine]!
+    pageNumber: Int!
+    pageSize: Int!
+    totalElements: Int!
+    totalPages: Int!
+}
+
+type PageResultUser {
+    content: [User]!
+    pageNumber: Int!
+    pageSize: Int!
+    totalElements: Int!
+    totalPages: Int!
+}
+
+type CustomGraphQLError {
+  errMsg: String!
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+
