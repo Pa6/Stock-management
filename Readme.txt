@@ -53,6 +53,8 @@ This GraphQL-based service provides functionalities for managing products, order
 - The application use default port for tomcat 8080, it is available on localhost:8080/graphql
 - Access the DB console through http://localhost:8080/h2-console/
 - Default user credentials : email: admin@gmail.com password: admin
+- Build the docker image using this command:  docker build -t productmanagement .
+- Run the image using this command:  docker run -p 8000:8080   productmanagement (you can replace 8000 with any other available port)
 
 If more information is needed, kindly contact me on ngurinzira@gmail.com
 
